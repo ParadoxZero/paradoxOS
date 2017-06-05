@@ -7,8 +7,8 @@ AS := i686-elf-as
 
 CFLAGS := -std=gnu99 -ffreestanding -O2 -Wall -Wextra
 
-mkdir -p $(BIN)
-mkdir -p $(BUILD)
+$(shell mkdir -p $(BIN))
+$(shell mkdir -p $(BUILD))
 
 default: link
 
