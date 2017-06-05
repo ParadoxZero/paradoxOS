@@ -1,12 +1,22 @@
 
+BIN := bin
+BUILD := build
+
+CC := i686-elf-gcc
+AS := i686-elf-as
+
+CFLAGS := -std=gnu99 -ffreestanding -O2 -Wall -Wextra
+
+mkdir -p $(BIN)
+mkdir -p $(BUILD)
 
 default: link
 
-build/boot:
-	i686-elf-as src/boot.s -o build/boot.o
+$(BUILD)/boot:
+	$(AS) src/boot.s -o $(BUILD)/boot.o
 
-build/kernel: build/boot
-	i686-elf-gcc -c src/kernel.c -o build/kernel.o -std=gnu99 -ffreestanding -O2 -Wall -Wextra
+$(BUILD)/kernel: build/boot
+	$(CC) -c src/kernel.c -o $(BUILD)/kernel.o $(CFLAGS)
 
-link: build/boot build/kernel
-	i686-elf-gcc -T src/linker.ld -o bin/myos.bin -ffreestanding -O2 -nostdlib build/boot.o build/kernel.o -lgcc
+link: $(BUILD)/boot $(BUILD)/kernel
+	$(CC) -T src/linker.ld -o $(BIN)/myos.bin -ffreestanding -O2 -nostdlib build/boot.o build/kernel.o -lgcc
