@@ -15,6 +15,9 @@ default: link
 $(BUILD)/boot:
 	$(AS) src/boot.s -o $(BUILD)/boot.o
 
+$(BUILD)/basic_vga:
+	$(CC) -c src/basic_vga.c -o $(BUILD)/kernel.o $(CFLAGS)
+
 $(BUILD)/kernel: build/boot
 	$(CC) -c src/kernel.c -o $(BUILD)/kernel.o $(CFLAGS)
 
