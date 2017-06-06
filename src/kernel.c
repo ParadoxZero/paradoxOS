@@ -17,9 +17,10 @@ void kernel_main(void) {
 
     /* Newline support is left. */
     terminal_write("Hello, kernel World!\nNew line, yay!\n");
-    for (int i = 0; i < 25; ++i) {
-        terminal_write("Hello\n");
-        terminal_write("world\n");
-        terminal_write("Nice\n");
+    char *words[] = {"one\n","two\n","three\n","4\n","5\n","6\n","7\n"};
+    for (int i = 0; i < 5; ++i) {
+        for(int j=0; j<5;++j){
+                terminal_write(words[j]);
+        }
     }
 }

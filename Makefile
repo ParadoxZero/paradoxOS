@@ -7,10 +7,9 @@ AS := i686-elf-as
 
 CFLAGS := -std=gnu99 -ffreestanding -O2 -Wall -Wextra
 
-$(shell mkdir -p $(BIN))
-$(shell mkdir -p $(BUILD))
 
-default: link
+
+default: clean link
 
 $(BUILD)/boot.o:
 	$(AS) src/boot.s -o $(BUILD)/boot.o
@@ -23,3 +22,9 @@ $(BUILD)/kernel.o:
 
 link: $(BUILD)/boot.o $(BUILD)/kernel.o $(BUILD)/basic_vga.o
 	$(CC) -T src/linker.ld -o $(BIN)/myos.bin -ffreestanding -O2 -nostdlib build/boot.o build/kernel.o build/basic_vga.o -lgcc
+
+clean:
+	$(shell rm -r $(BUILD))
+	$(shell rm -r $(BIN))
+	$(shell mkdir -p $(BIN))
+	$(shell mkdir -p $(BUILD))
