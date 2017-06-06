@@ -32,6 +32,6 @@ void terminal_initialize(void);
 
 void terminal_setcolor(uint8_t color);
 
-void terminal_writestring(const char* data);
+void terminal_write(const char* data);
 
 #endif // HEADER GUARD
