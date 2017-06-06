@@ -1,6 +1,8 @@
 #ifndef _PARADOX_OS_VGA
 #define _PARADOX_OS_VGA
 
+#include <stdbool.h>
+#include <stddef.h>
 #include <stdint.h>
 
 #define TERMINAL_SIZE 4000
@@ -31,3 +33,5 @@ void terminal_initialize(void);
 void terminal_setcolor(uint8_t color);
 
 void terminal_writestring(const char* data);
+
+#endif // HEADER GUARD
