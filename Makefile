@@ -18,8 +18,8 @@ $(BUILD)/boot.o:
 $(BUILD)/basic_vga.o:
 	$(CC) -c src/basic_vga.c -o $(BUILD)/basic_vga.o $(CFLAGS)
 
-$(BUILD)/kernel.o: $(BUILD)/basic_vga.o
-	$(CC) -c src/kernel.c $(BUILD)/basic_vga.o -o $(BUILD)/kernel.o $(CFLAGS)
+$(BUILD)/kernel.o:
+	$(CC) -c src/kernel.c  -o $(BUILD)/kernel.o $(CFLAGS)
 
-link: $(BUILD)/boot.o $(BUILD)/kernel.o
-	$(CC) -T src/linker.ld -o $(BIN)/myos.bin -ffreestanding -O2 -nostdlib build/boot.o build/kernel.o -lgcc
+link: $(BUILD)/boot.o $(BUILD)/kernel.o $(BUILD)/basic_vga.o
+	$(CC) -T src/linker.ld -o $(BIN)/myos.bin -ffreestanding -O2 -nostdlib build/boot.o build/kernel.o build/basic_vga.o -lgcc
