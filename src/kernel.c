@@ -17,4 +17,9 @@ void kernel_main(void) {
 
     /* Newline support is left. */
     terminal_writestring("Hello, kernel World!\nNew line, yay!\n");
+    for (int i = 0; i < 25; ++i) {
+        terminal_writestring("Hello\n");
+        terminal_writestring("world\n");
+        terminal_writestring("Nice\n");
+    }
 }
