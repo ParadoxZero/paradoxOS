@@ -15,12 +15,6 @@ void kernel_main(void) {
     /* Initialize terminal interface */
     terminal_initialize();
 
-    /* Newline support is left. */
-    terminal_write("Hello, kernel World!\nNew line, yay!\n");
-    char *words[] = {"one\n","two\n","three\n","4\n","5\n","6\n","7\n"};
-    for (int i = 0; i < 5; ++i) {
-        for(int j=0; j<5;++j){
-                terminal_write(words[j]);
-        }
-    }
+    terminal_write("Welcome to Paradox OS\n");
+    terminal_write("Nice to meet you.\n");
 }
