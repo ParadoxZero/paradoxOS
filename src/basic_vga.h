@@ -1,6 +1,8 @@
 #ifndef _PARADOX_OS_VGA
 #define _PARADOX_OS_VGA
 
+#include <stdbool.h>
+#include <stddef.h>
 #include <stdint.h>
 
 #define TERMINAL_SIZE 4000
