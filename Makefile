@@ -16,9 +16,9 @@ $(BUILD)/boot:
 	$(AS) src/boot.s -o $(BUILD)/boot.o
 
 $(BUILD)/basic_vga:
-	$(CC) -c src/basic_vga.c -o $(BUILD)/kernel.o $(CFLAGS)
+	$(CC) -c src/basic_vga.c -o $(BUILD)/basic_vga.o $(CFLAGS)
 
-$(BUILD)/kernel: build/boot
+$(BUILD)/kernel: $(BUILD)/boot $(BUILD)/basic_vga.o
 	$(CC) -c src/kernel.c -o $(BUILD)/kernel.o $(CFLAGS)
 
 link: $(BUILD)/boot $(BUILD)/kernel
