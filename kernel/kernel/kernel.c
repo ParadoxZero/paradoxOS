@@ -1,6 +1,6 @@
 
 
-#include "basic_vga.h"
+#include <tty.h>
 
 /* Check if the compiler thinks we are targeting the wrong operating system. */
 #if defined(__linux__)

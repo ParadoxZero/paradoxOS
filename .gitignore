@@ -118,3 +118,4 @@ bin
 build
 iso
 *.iso
+sysroot

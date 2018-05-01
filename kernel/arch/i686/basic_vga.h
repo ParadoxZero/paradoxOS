@@ -28,10 +28,6 @@ enum vga_color {
 
 extern uint16_t terminal_buffer[TERMINAL_SIZE];
 
-void terminal_initialize(void);
 
-void terminal_setcolor(uint8_t color);
-
-void terminal_write(const char* data);
 
 #endif // HEADER GUARD
