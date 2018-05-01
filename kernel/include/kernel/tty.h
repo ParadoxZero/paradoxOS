@@ -15,21 +15,34 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include <kernel/tty.h>
+/*
+ * @file tty.h
+ * 
+ * @brief Functions to print statements to terminal in early stages of boot.
+ */
 
-/* Check if the compiler thinks we are targeting the wrong operating system. */
-#if defined(__linux__)
-#error "You are not using a cross-compiler"
+#ifndef __PARADOX_OS_TTY_
+#define __PARADOX_OS_TTY_
+
+/*
+ * Function: terminal_initialize
+ * 
+ * @params      None
+ * @return      None
+ * 
+ * Initializes the terminal display so that it can be used.
+ */
+void terminal_initialize(void);
+
+/*
+ * Function: terminal_write
+ * 
+ * @param data      Constant character array. The string
+ *                  that is to be printed      
+ * @return      None
+ * 
+ * Puts the given string into the terminal.
+ */
+void terminal_write(const char* data);
+
 #endif
-
-#if !defined(__i386__)
-#error "This needs to be compiled with a ix86-elf compiler"
-#endif
-
-void kernel_main(void) {
-    /* Initialize terminal interface */
-    terminal_initialize();
-
-    terminal_write("Welcome to Paradox OS\n");
-    terminal_write("Nice to meet you.\n");
-}
