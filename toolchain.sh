@@ -6,7 +6,7 @@ BINUTILS_URL="ftp://ftp.gnu.org/gnu/binutils/binutils-2.30.tar.gz"
 GCC_URL="ftp://ftp.gnu.org/gnu/gcc/gcc-7.3.0/gcc-7.3.0.tar.gz"
 
 
-SOURCE=$HOME/toolchaintest
+SOURCE=$HOME/toolchain
 mkdir -p $SOURCE
 
 cd $SOURCE
