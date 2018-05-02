@@ -45,7 +45,9 @@ SOURCE :=\
 $(FREE_SOURCE) \
 $(HOSTED_SOURCE)
 
-LIBK_OBJS := $(FREE_SOURCE:.c=.libk.o)
+LIBK_TARGETS := $(FREE_SOURCE:.c=.libk.o)
+LIBK_OBJS :=  $(addprefix $(BUILDDIR)/, $(LIBK_TARGETS))
+
 # LIBC_OBJS := $() Later when lib c is buildable
 
 BINARIES := libk.a
@@ -75,8 +77,8 @@ clean:
 	rm -r $(BUILDDIR)
 	rm -r $(BIN)
 
-libk.a: $(LIBK_OBJS)
+libk.a: $(LIBK_TARGETS)
 	$(AR) rcs $(BIN)/$@ $(LIBK_OBJS)
 
 %.libk.o: %.c
-	$(CC) -c $< -o $@ $(LIBK_CFLAGS)
+	$(CC) -c $< -o $(BUILDDIR)/$@ $(LIBK_CFLAGS)
