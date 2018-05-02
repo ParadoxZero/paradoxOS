@@ -5,11 +5,14 @@ This is an hobbyst Operating System Project.
 
 ## Tools
 
-* [Freestanding GCC](https://wiki.osdev.org/GCC_Cross-Compiler) ( will make an automated script soon)
+* [Freestanding toolchain](https://wiki.osdev.org/GCC_Cross-Compiler) ( will make an automated script soon)
 * GNU Make
 * Grub
 * qemu
 * Linux (Obviously)
+
+## Compiling Freestanding Toolchain
+Execute the script `toolchain.sh`
 
 ## How to build
 
