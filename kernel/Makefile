@@ -23,7 +23,7 @@ AS	:= $(OAS)
 
 CFLAGS	:= $(CFLAGS) --std=gnu99 -ffreestanding -O2 -Wall -Wextra -nostdlib
 
-LIBS	:= -lgcc 
+LIBS	:= -lgcc -lk
 
 ARCHDIR		:= arch/$(HOST)
 KERNELDIR	:= kernel
@@ -44,7 +44,7 @@ OBJ_NAMES := $(C_SOURCE:.c=.o) $(A_SOURCE:.S=.o)
 OBJS := $(addprefix $(BUILDDIR)/, $(OBJ_NAMES))
 
 
-.PHONY: clean
+.PHONY: clean init
 
 .SUFFIXES: .o .c .S
 

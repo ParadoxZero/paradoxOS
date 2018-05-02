@@ -24,6 +24,8 @@
 #ifndef __PARADOX_OS_TTY_
 #define __PARADOX_OS_TTY_
 
+#include <string.h>
+
 /*
  * Function: terminal_initialize
  * 
