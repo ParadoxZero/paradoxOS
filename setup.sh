@@ -16,6 +16,7 @@
 # You should have received a copy of the GNU General Public License 
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 #
+set -o xtrace
 
 PROJECTS="libc kernel"
 
@@ -56,7 +57,9 @@ export HOST
 
 function setup(){
 	mkdir -p $SYSROOT
+	mkdir -p $SYSROOT/usr/include
 	cp -r $CONFIGDIR/* $SYSROOT/
+	cp -r kernel/include/* $SYSROOT/usr/include/
 }
 
 function clean(){
@@ -94,6 +97,9 @@ rebuild)
 	;;
 iso)
 	iso
+	;;
+setup)
+	setup
 	;;
 *)
 	echo "Please specify an Option"

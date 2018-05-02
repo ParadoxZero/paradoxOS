@@ -36,7 +36,15 @@ LIBK := .libk
 MODULES := stdio stdlib string 
 FREE_SOURCE :=\
 $(ARCH_FREE_SOURCE) \
-string/strlen.c
+string/strlen.c 	\
+string/memcpy.c		\
+string/memcmp.c		\
+string/memmove.c	\
+string/memset.c		\
+stdlib/abort.c		\
+stdio/printf.c		\
+stdio/putchar.c		\
+stdio/puts.c		\
 
 HOSTED_SOURCE :=\
 $(ARCH_HOSTED_SOURCE)

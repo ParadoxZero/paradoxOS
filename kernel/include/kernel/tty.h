@@ -25,6 +25,8 @@
 #define __PARADOX_OS_TTY_
 
 #include <string.h>
+#include <stddef.h>
+
 
 /*
  * Function: terminal_initialize
@@ -36,8 +38,12 @@
  */
 void terminal_initialize(void);
 
+void terminal_write(const char* data, size_t size);
+
+void terminal_putchar(char c);
+
 /*
- * Function: terminal_write
+ * Function: terminal_writestring
  * 
  * @param data      Constant character array. The string
  *                  that is to be printed      
@@ -45,6 +51,7 @@ void terminal_initialize(void);
  * 
  * Puts the given string into the terminal.
  */
-void terminal_write(const char* data);
+
+void terminal_writestring(const char* data);
 
 #endif

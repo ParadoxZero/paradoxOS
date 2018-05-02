@@ -25,7 +25,7 @@ extern "C" {
 #endif
 
 int memcmp(const void*, const void*, size_t);
-void* memcpy(void* __restrict, const void* __restrict, size_t);
+void* memcpy(void* __restrict dest, const void* __restrict src, size_t size);
 void* memmove(void*, const void*, size_t);
 void* memset(void*, int, size_t);
 size_t strlen(const char*); 

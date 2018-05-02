@@ -30,6 +30,6 @@ void kernel_main(void) {
     /* Initialize terminal interface */
     terminal_initialize();
 
-    terminal_write("Welcome to Paradox OS\n");
-    terminal_write("Nice to meet you.\n");
+    terminal_writestring("Welcome to Paradox OS\n");
+    terminal_writestring("Nice to meet you.\n");
 }
