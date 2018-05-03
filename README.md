@@ -28,7 +28,7 @@ Then run the iso using qemu
 ```
 ## Contributing
 
-Contributinos are always welcome. Please check issues to see any pending task.
+Contributions are always welcome. Please check issues to see any pending task.
 
 Feel free to send a pull request.
 
