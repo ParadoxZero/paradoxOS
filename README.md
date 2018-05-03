@@ -31,3 +31,10 @@ Then run the iso using qemu
 Contributinos are always welcome. Please check issues to see any pending task.
 
 Feel free to send a pull request.
+
+## References
+
+* [Osdev Wiki](https://wiki.osdev.org)
+* [Building OS from scratch](http://www.cs.bham.ac.uk/%7Eexr/lectures/opsys/10_11/lectures/os-dev.pdf)
+* [x86 Assembly](https://en.wikibooks.org/wiki/X86_Assembly)
+* Google!
