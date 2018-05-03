@@ -1,7 +1,7 @@
 # ParadoxOS
-Unix unlike operating system. 
+This is an hobbyist Operating System Project currently in very early stage. The design has not been finalized yet, hence no formal design docs is available.
 
-This is an hobbyst Operating System Project.
+At the moment, the aim is to initialize the kernel properly to utilize modern system features.
 
 ## Tools
 
@@ -16,12 +16,13 @@ Execute the script `toolchain.sh`
 
 ## How to build
 
-Once you have the requried tools. Simply fo to the project root and
+Once you have the requried tools.
 ```
     $ ./setup.sh iso
 ```
+This will build an iso file called `paradoxOS.iso`. This is a binary complaint with multiboot standard, and is compiled using grub. That means, it can be simply booted up.
 
-Then run the iso using qemu
+Though using an emulator is recommended.
 
 ```
     $ qemu-system-i686 -cdrom paradoxOS.iso
