@@ -26,3 +26,8 @@ Then run the iso using qemu
 ```
     $ qemu-system-i686 -cdrom paradoxOS.iso
 ```
+## Contributing
+
+Contributinos are always welcome. Please check issues to see any pending task.
+
+Feel free to send a pull request.

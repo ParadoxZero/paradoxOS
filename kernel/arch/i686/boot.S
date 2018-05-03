@@ -55,6 +55,8 @@ _start:
 	# in assembly as languages such as C cannot function without a stack.
 	mov $stack_top, %esp
 
+	call _init
+
 	# This is a good place to initialize crucial processor state before the
 	# high-level kernel is entered. It's best to minimize the early
 	# environment where crucial features are offline. Note that the

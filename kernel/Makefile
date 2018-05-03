@@ -38,10 +38,16 @@ $(ARCHDIR)/tty.c \
 $(KERNEL_SOURCE)
 
 A_SOURCE :=\
-$(ARCHDIR)/boot.S
+$(ARCHDIR)/boot.S \
+
 
 OBJ_NAMES := $(C_SOURCE:.c=.o) $(A_SOURCE:.S=.o)
 OBJS := $(addprefix $(BUILDDIR)/, $(OBJ_NAMES))
+
+CRTI_OBJ=$(ARCHDIR)/crti.o
+CRTBEGIN_OBJ:=$(shell $(CC) $(CFLAGS) -print-file-name=crtbegin.o)
+CRTEND_OBJ:=$(shell $(CC) $(CFLAGS) -print-file-name=crtend.o)
+CRTN_OBJ=$(ARCHDIR)/crtn.o
 
 
 .PHONY: clean init
@@ -65,8 +71,8 @@ init:
 	mkdir -p $(SYSROOT)/usr/include
 	cp -r include/* $(SYSROOT)/usr/include
 
-$(KERNEL_NAME).bin: $(OBJ_NAMES)
-	$(CC) -T $(ARCHDIR)/linker.ld -o $(BIN)/$@ $(CFLAGS) $(OBJS) $(LIBS)
+$(KERNEL_NAME).bin: $(OBJ_NAMES) $(CRTI_OBJ) $(CRTN_OBJ)
+	$(CC) $(CFLAGS) -T $(ARCHDIR)/linker.ld -o $(BIN)/$@ $(BUILDDIR)/$(CRTI_OBJ) $(CRTBEGIN_OBJ) $(OBJS) $(LIBS) $(CRTEND_OBJ) $(BUILDDIR)/$(CRTN_OBJ)
 	grub-file --is-x86-multiboot $(BIN)/$@
 
 %.o: %.S

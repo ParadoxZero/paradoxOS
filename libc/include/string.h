@@ -24,11 +24,38 @@
 extern "C" {
 #endif
 
-int memcmp(const void*, const void*, size_t);
+/*============================================= 
+ * Memory manupulation APIs
+ * -------------------------
+ * 
+ * The following APIs may be used to manupulate
+ * type generic continuous memory blocks.
+ * 
+ *=============================================*/
+
+int memcmp(const void* a, const void* b, size_t size);
+
 void* memcpy(void* __restrict dest, const void* __restrict src, size_t size);
-void* memmove(void*, const void*, size_t);
-void* memset(void*, int, size_t);
-size_t strlen(const char*); 
+
+void* memmove(void* dst, const void* src, size_t size);
+
+void* memset(void* loc, int val, size_t size);
+
+/* ========================
+ * String Manupulation APIs
+ * ------------------------
+ * 
+ * ========================*/
+
+size_t strlen(const char* str);
+
+int strcmp(const char* a, const char* b);   // Unimplemented
+
+void strcat(char* dst, const char* src);    // Unimplemented
+
+void strcpy(char* dst, const char* src);    // Unimplemented
+
+//TODO: Add the rest
 
 #ifdef __cplusplus
 }
