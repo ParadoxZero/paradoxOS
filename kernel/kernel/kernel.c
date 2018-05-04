@@ -16,6 +16,7 @@
 */
 
 #include <kernel/tty.h>
+#include <stdio.h>
 
 /* Check if the compiler thinks we are targeting the wrong operating system. */
 #if defined(__linux__)
@@ -30,6 +31,6 @@ void kernel_main(void) {
     /* Initialize terminal interface */
     terminal_initialize();
 
-    terminal_writestring("Welcome to Paradox OS\n");
-    terminal_writestring("Nice to meet you.\n");
+    printf("Hi, welcome to paradoxOS.\n");
+    printf("Bye....");
 }

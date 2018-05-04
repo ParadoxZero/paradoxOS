@@ -15,13 +15,14 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include <stdint.h>
 
-inline static void outb(uinst16_t port, uint8_t data){
-    asm volatile ("outb %0,%1"::"a"(data),"Nd"(port));
+inline static void outb(uint16_t port, uint8_t data){
+    asm volatile ( "outb %0, %1" : : "a"(data), "Nd"(port) );
 }
 
 inline static uint8_t inb(uint16_t port){
     uint8_t data;
-    asm volatile ("inb %0,%1":"=a"(data):"Nd"(port));
+    asm volatile ("inb %1,%0":"=a"(data):"Nd"(port));
     return data;
 }

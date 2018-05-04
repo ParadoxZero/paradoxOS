@@ -15,7 +15,10 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include<stdint.h>
+
 #include <kernel/tty.h>
+#include <sys/io.h>
 
 #include "basic_vga.h"
 
@@ -29,7 +32,28 @@ uint16_t* vga_buffer;
 static uint16_t* terminal_buffer;
 static uint16_t* const VGA_MEMORY = (uint16_t*) 0xB8000;
 
+void enable_cursor(uint8_t cursor_start, uint8_t cursor_end) {
+	outb(0x3D4, 0x0A);
+	outb(0x3D5, (inb(0x3D5) & 0xC0) | cursor_start);
+ 
+	outb(0x3D4, 0x0B);
+	outb(0x3D5, (inb(0x3E0) & 0xE0) | cursor_end);
+}
 
+void disable_cursor() {
+	outb(0x3D4, 0x0A);
+	outb(0x3D5, 0x20);
+}
+
+void update_cursor(int x, int y)
+{
+	uint16_t pos = y * VGA_WIDTH + x;
+ 
+	outb(0x3D4, 0x0F);
+	outb(0x3D5, (uint8_t) (pos & 0xFF));
+	outb(0x3D4, 0x0E);
+	outb(0x3D5, (uint8_t) ((pos >> 8) & 0xFF));
+}
 
 void terminal_clear(void){
     for (size_t y = 0; y < VGA_HEIGHT; y++) {
@@ -45,12 +69,9 @@ void terminal_initialize(void) {
 	terminal_column = 0;
 	terminal_color = vga_entry_color(VGA_COLOR_LIGHT_GREY, VGA_COLOR_BLACK);
 	terminal_buffer = VGA_MEMORY;
-	for (size_t y = 0; y < VGA_HEIGHT; y++) {
-		for (size_t x = 0; x < VGA_WIDTH; x++) {
-			const size_t index = y * VGA_WIDTH + x;
-			terminal_buffer[index] = vga_entry(' ', terminal_color);
-		}
-	}
+	terminal_clear();
+
+	enable_cursor(14,15);
 }
 
 void terminal_setcolor(uint8_t color) {
@@ -80,6 +101,7 @@ void terminal_putchar(char c) {
 void terminal_write(const char* data, size_t size) {
 	for (size_t i = 0; i < size; i++)
 		terminal_putchar(data[i]);
+	update_cursor(terminal_column, terminal_row);
 }
 
 void terminal_writestring(const char* data) {
