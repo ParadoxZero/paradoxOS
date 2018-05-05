@@ -14,24 +14,10 @@
  * You should have received a copy of the GNU General Public License 
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
-#include <stdio.h>
 
-#include <kernel/tty.h>
-#include <arch/gdt.h>
-
-/* Check if the compiler thinks we are targeting the wrong operating system. */
-#if defined(__linux__)
-#error "You are not using a cross-compiler"
-#endif
-
-#if !defined(__i386__)
-#error "This needs to be compiled with a ix86-elf compiler"
-#endif
-
-void kernel_main(void) {
-    /* Initialize terminal interface */
-    terminal_initialize();
-    printf("Booting ParadoxOS....\n");
-    printf("Setting up GDT");
-
-}
+/*
+ * @file keyboard.h
+ * 
+ * @brief keyboard driver interface
+ * 
+ */

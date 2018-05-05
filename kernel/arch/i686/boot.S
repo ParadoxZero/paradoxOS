@@ -32,6 +32,10 @@ stack_bottom:
 .skip 16384 # 16 KiB
 stack_top:
 
+gdt:
+	.skip 40 # Our GDT is going to be 5x8 = 40 Bit long
+gdt_end:
+
 # The linker script specifies _start as the entry point to the kernel and the
 # bootloader will jump to this position once the kernel has been loaded. It
 # doesn't make sense to return from this function as the bootloader is gone.
@@ -55,8 +59,6 @@ _start:
 	# in assembly as languages such as C cannot function without a stack.
 	mov $stack_top, %esp
 
-	call _init
-
 	# This is a good place to initialize crucial processor state before the
 	# high-level kernel is entered. It's best to minimize the early
 	# environment where crucial features are offline. Note that the
@@ -65,7 +67,11 @@ _start:
 	# yet. The GDT should be loaded here. Paging should be enabled here.
 	# C++ features such as global constructors and exceptions will require
 	# runtime support to work as well.
+	call _init
 
+	pushw $5
+	push gdt
+	call set_gdt
 	# Enter the high-level kernel. The ABI requires the stack is 16-byte
 	# aligned at the time of the call instruction (which afterwards pushes
 	# the return pointer of size 4 bytes). The stack was originally 16-byte

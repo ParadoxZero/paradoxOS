@@ -30,6 +30,11 @@ KERNELDIR	:= kernel
 BIN			:= bin
 BUILDDIR	:= build
 
+INCLUDEDIRS =\
+arch/include 
+
+CC := $(CC) -I$(INCLUDEDIRS)
+
 KERNEL_SOURCE = \
 $(KERNELDIR)/kernel.c
 
@@ -39,6 +44,7 @@ $(KERNEL_SOURCE)
 
 A_SOURCE :=\
 $(ARCHDIR)/boot.S \
+$(ARCHDIR)/gdt.S
 
 
 OBJ_NAMES := $(C_SOURCE:.c=.o) $(A_SOURCE:.S=.o)
