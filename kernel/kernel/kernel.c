@@ -17,7 +17,8 @@
 #include <stdio.h>
 
 #include <kernel/tty.h>
-#include <arch/gdt.h>
+
+#include "init_gdt.h"
 
 /* Check if the compiler thinks we are targeting the wrong operating system. */
 #if defined(__linux__)
@@ -32,6 +33,9 @@ void kernel_main(void) {
     /* Initialize terminal interface */
     terminal_initialize();
     printf("Booting ParadoxOS....\n");
-    printf("Setting up GDT");
+    printf("Setting up Global Descriptor Table.....");
+    init_gdt();
+    printf("Finished (OK)\n");
+
 
 }

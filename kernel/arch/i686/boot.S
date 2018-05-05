@@ -28,11 +28,12 @@
 # undefined behavior.
 .section .bss
 .align 16
+.global _gdt
 stack_bottom:
 .skip 16384 # 16 KiB
 stack_top:
 
-gdt:
+_gdt:
 	.skip 40 # Our GDT is going to be 5x8 = 40 Bit long
 gdt_end:
 
@@ -70,7 +71,7 @@ _start:
 	call _init
 
 	pushw $5
-	push gdt
+	push _gdt
 	call set_gdt
 	# Enter the high-level kernel. The ABI requires the stack is 16-byte
 	# aligned at the time of the call instruction (which afterwards pushes

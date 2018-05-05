@@ -35,8 +35,11 @@ arch/include
 
 CC := $(CC) -I$(INCLUDEDIRS)
 
-KERNEL_SOURCE = \
-$(KERNELDIR)/kernel.c
+KERNEL_SOURCE_FILES = \
+kernel.c \
+init_gdt.c
+
+KERNEL_SOURCE = $(addprefix $(KERNELDIR)/,$(KERNEL_SOURCE_FILES))
 
 C_SOURCE :=\
 $(ARCHDIR)/tty.c \
