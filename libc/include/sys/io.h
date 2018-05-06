@@ -14,7 +14,8 @@
  * You should have received a copy of the GNU General Public License 
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
-
+#ifndef __PARADOX_OS_LIBC_IO_
+#define __PARADOX_OS_LIBC_IO_
 #include <stdint.h>
 
 inline static void outb(uint16_t port, uint8_t data){
@@ -26,3 +27,5 @@ inline static uint8_t inb(uint16_t port){
     asm volatile ("inb %1,%0":"=a"(data):"Nd"(port));
     return data;
 }
+
+#endif //__PARADOX_OS_LIBC_IO_

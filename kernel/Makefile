@@ -20,8 +20,9 @@ KERNEL_DEST 	:= $(SYSROOT)/boot
 
 CC	:= $(OCC)
 AS	:= $(OAS)
+OBJCPY := $(TARGET)-objcopy
 
-CFLAGS	:= $(CFLAGS) --std=gnu99 -ffreestanding -O2 -Wall -Wextra -nostdlib
+CFLAGS	:= $(CFLAGS) --std=gnu99 -ffreestanding -O2 -Wall -Wextra -nostdlib -g
 
 LIBS	:= -lgcc -lk
 
@@ -37,7 +38,8 @@ CC := $(CC) -I$(INCLUDEDIRS)
 
 KERNEL_SOURCE_FILES = \
 kernel.c \
-init_gdt.c
+init_gdt.c \
+serial.c
 
 KERNEL_SOURCE = $(addprefix $(KERNELDIR)/,$(KERNEL_SOURCE_FILES))
 
@@ -81,11 +83,11 @@ init:
 	cp -r include/* $(SYSROOT)/usr/include
 
 $(KERNEL_NAME).bin: $(OBJ_NAMES) $(CRTI_OBJ) $(CRTN_OBJ)
-	$(CC) $(CFLAGS) -T $(ARCHDIR)/linker.ld -o $(BIN)/$@ $(BUILDDIR)/$(CRTI_OBJ) $(CRTBEGIN_OBJ) $(OBJS) $(LIBS) $(CRTEND_OBJ) $(BUILDDIR)/$(CRTN_OBJ)
+	$(CC) $(CFLAGS) -T $(ARCHDIR)/linker.ld -o $(BIN)/$@ $(BUILDDIR)/$(CRTI_OBJ) $(CRTBEGIN_OBJ) $(OBJS) $(LIBS) $(CRTEND_OBJ) $(BUILDDIR)/$(CRTN_OBJ) 
 	grub-file --is-x86-multiboot $(BIN)/$@
 
 %.o: %.S
-	$(AS) $< -o $(BUILDDIR)/$@
+	$(AS) -g $< -o $(BUILDDIR)/$@
 
 %.o: %.c
 	$(CC) -c $< -o $(BUILDDIR)/$@ $(CFLAGS)

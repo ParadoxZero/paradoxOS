@@ -31,6 +31,8 @@
 
 #include <stdint.h>
 
+#include <arch/gdt.h>
+
 // Each define here is for a specific flag in the descriptor.
 // Refer to the intel documentation for a description of what each one does.
 #define SEG_DESCTYPE(x)  ((x) << 0x04) // Descriptor type (0 for system, 1 for code/data)
@@ -74,7 +76,7 @@
                      SEG_LONG(0)     | SEG_SIZE(1) | SEG_GRAN(1) | \
                      SEG_PRIV(3)     | SEG_DATA_RDWR
 
-uint16_t create_descriptor(uint32_t base, uint32_t limit, uint16_t flag);
+uint64_t create_descriptor(uint32_t base, uint32_t limit, uint16_t flag);
 void init_gdt();
 
 #endif //__PARADOX_OS_KERNEL_INTERNAL_INIT_GDT_

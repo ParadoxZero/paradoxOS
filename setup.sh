@@ -78,9 +78,6 @@ function build(){
 }
 
 function iso(){
-	clean
-	setup
-	build
 	grub-mkrescue $SYSROOT -o paradoxOS.iso
 }
 
@@ -96,6 +93,7 @@ rebuild)
 	build
 	;;
 iso)
+	build
 	iso
 	;;
 setup)

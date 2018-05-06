@@ -119,3 +119,4 @@ build
 iso
 *.iso
 sysroot
+runlog.log

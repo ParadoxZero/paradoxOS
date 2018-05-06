@@ -18,9 +18,13 @@
 #include<stdint.h>
 
 #include <kernel/tty.h>
+#include<kernel/serial.h>
+
 #include <sys/io.h>
 
 #include "basic_vga.h"
+
+#define DEBUG
 
 static const size_t VGA_WIDTH = 80;
 static const size_t VGA_HEIGHT = 25;
@@ -99,8 +103,12 @@ void terminal_putchar(char c) {
 }
 
 void terminal_write(const char* data, size_t size) {
-	for (size_t i = 0; i < size; i++)
+	for (size_t i = 0; i < size; i++){
 		terminal_putchar(data[i]);
+		#ifdef DEBUG
+		serial_write(DEBUG_COM_PORT,data[i]);
+		#endif
+	}
 	update_cursor(terminal_column, terminal_row);
 }
 

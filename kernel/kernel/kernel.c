@@ -17,6 +17,8 @@
 #include <stdio.h>
 
 #include <kernel/tty.h>
+#include <kernel/serial.h>
+#include<arch/gdt.h>
 
 #include "init_gdt.h"
 
@@ -29,13 +31,21 @@
 #error "This needs to be compiled with a ix86-elf compiler"
 #endif
 
+#define DEBUG
+
 void kernel_main(void) {
     /* Initialize terminal interface */
+     #ifdef DEBUG
+    init_serial(DEBUG_COM_PORT);
+    serial_writeline(DEBUG_COM_PORT,"Kernel Loaded..\n");
+    #endif
     terminal_initialize();
     printf("Booting ParadoxOS....\n");
     printf("Setting up Global Descriptor Table.....");
     init_gdt();
     printf("Finished (OK)\n");
-
+    printf("Reloading segment registers to reflect GDT.....");
+    reload_segments();
+    printf("Finished (OK)\n");
 
 }

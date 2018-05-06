@@ -3,6 +3,7 @@
 #include <stdarg.h>
 #include <stdio.h>
 #include <string.h>
+#include <stdint.h>
 
 static bool print(const char* data, size_t length) {
 	const unsigned char* bytes = (const unsigned char*) data;
@@ -61,6 +62,16 @@ int printf(const char* restrict format, ...) {
 			if (!print(str, len))
 				return -1;
 			written += len;
+		} else if (*format == 'u'){
+			format++;
+			int val = va_arg(parameters, int);
+			int n = val;
+			char c;
+			do{
+				c ='0' + n%10 ;
+				print(&c, sizeof(c));
+				n = n/10;
+			}while(n>0);
 		} else {
 			format = format_begun_at;
 			size_t len = strlen(format);

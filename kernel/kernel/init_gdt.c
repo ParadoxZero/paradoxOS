@@ -15,16 +15,15 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
 */ 
 
+#include <stdio.h>
 
 #include "init_gdt.h"
- 
-extern uint8_t _gdt;
-uint8_t *gdt_location;
-uint8_t gdt_index=0;
 
-uint16_t create_descriptor(uint32_t base, uint32_t limit, uint16_t flag)
-{
-    uint64_t descriptor;
+#define GDT_LENGTH 3
+gdt_t gdt[5];
+
+gdt_t create_descriptor(uint32_t base, uint32_t limit, uint16_t flag) {
+    uint64_t descriptor=0;
  
     // Create the high 32 bit segment
     descriptor  =  limit       & 0x000F0000;         // set limit bits 19:16
@@ -43,10 +42,10 @@ uint16_t create_descriptor(uint32_t base, uint32_t limit, uint16_t flag)
 }
 
 void init_gdt(){
-    gdt_location = &_gdt;
-    gdt_location[gdt_index++] = create_descriptor(0, 0, 0);
-    gdt_location[gdt_index++] = create_descriptor(0, 0x000FFFFF, (GDT_CODE_PL0));
-    gdt_location[gdt_index++] = create_descriptor(0, 0x000FFFFF, (GDT_DATA_PL0));
-    gdt_location[gdt_index++] = create_descriptor(0, 0x000FFFFF, (GDT_CODE_PL3));
-    gdt_location[gdt_index++] = create_descriptor(0, 0x000FFFFF, (GDT_DATA_PL3));
+    set_gdt(gdt, sizeof(gdt));
+    gdt[0] = create_descriptor(0, 0, 0);
+    gdt[1] = create_descriptor(0, 0xFFFFFFFF, (GDT_CODE_PL0));
+    gdt[2] = create_descriptor(0, 0xFFFFFFFF, (GDT_DATA_PL0));
+    gdt[3] = create_descriptor(0, 0xFFFFFFFF, (GDT_CODE_PL3));
+    gdt[4] = create_descriptor(0, 0xFFFFFFFF, (GDT_DATA_PL3));
 }
