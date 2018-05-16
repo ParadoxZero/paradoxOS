@@ -29,9 +29,7 @@ Though using an emulator is recommended.
 ```
 ## Contributing
 
-Contributions are always welcome. Please check issues to see any pending task.
-
-Feel free to send a pull request.
+Currently, not acceping pull requests :)
 
 ## References
 
