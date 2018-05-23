@@ -21,6 +21,9 @@
  * @brief This file contains the keycode definitions used in the kernel
  * 
  */ 
+
+#include <stdint.h>
+
 enum KeyCodes {
     KEY_ESC,
     
