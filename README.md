@@ -5,7 +5,7 @@ At the moment, the aim is to initialize the kernel properly to utilize modern sy
 
 ## Tools
 
-* [Freestanding toolchain](https://wiki.osdev.org/GCC_Cross-Compiler) ( will make an automated script soon)
+* [Freestanding toolchain](https://wiki.osdev.org/GCC_Cross-Compiler)
 * GNU Make
 * Grub
 * qemu
