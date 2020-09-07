@@ -27,10 +27,6 @@ Though using an emulator is recommended.
 ```
     $ qemu-system-i686 -cdrom paradoxOS.iso
 ```
-## Contributing
-
-Currently, not acceping pull requests :)
-
 ## References
 
 * [Osdev Wiki](https://wiki.osdev.org)
